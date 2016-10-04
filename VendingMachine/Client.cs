@@ -1,25 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Globalization;
 
 namespace VendingMachine
 {
     class Client
     {
-        public int MakeChoice()
+        private Coins _coins;
+
+        private Coins Coins
         {
-
-
-            return 0;
+            get
+            {
+                if (_coins == null) _coins = new Coins();
+                return _coins;
+            }
         }
 
-        public int PutMoney()
+        public Snack MakeChoice(List<Snack> snacks)
         {
+            Random random = new Random();
+            var index = random.Next(0, snacks.Count);
+            Debug.WriteLine(string.Format(CultureInfo.InvariantCulture, "Chosen: {0}", snacks[index].Price));
+            return snacks[index];
+        }
 
-
-            return 0;
+        public double InsertCoin()
+        {
+            Random random = new Random();
+            var index = random.Next(0, Coins.Types.Length);
+            return Coins.Types[index];
         }
     }
 }
